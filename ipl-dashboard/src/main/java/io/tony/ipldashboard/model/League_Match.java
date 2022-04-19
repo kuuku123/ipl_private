@@ -3,15 +3,20 @@ package io.tony.ipldashboard.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-public class Match {
+@Entity
+public class League_Match {
 
-    private String id;
+    @Id @GeneratedValue
+    private Long id;
     private String city;
-    private LocalDateTime date;
+    private LocalDate date;
     private String playerOfMatch;
     private String venue;
     private String team1;

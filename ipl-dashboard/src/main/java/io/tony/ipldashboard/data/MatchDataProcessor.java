@@ -1,26 +1,23 @@
 package io.tony.ipldashboard.data;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
-import io.tony.ipldashboard.model.Match;
+import io.tony.ipldashboard.model.League_Match;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public class MatchDataProcessor implements ItemProcessor<MatchInput,Match>{
+public class MatchDataProcessor implements ItemProcessor<MatchInput, League_Match>{
     
-    private static final Logger log = LoggerFactory.getLogger();
 
     @Override
-    public Match process(MatchInput matchInput) throws Exception {
-        Match match = new Match();
-        match.setId(matchInput.getId());
-        match.setCity(matchInput.getCity());
+    public League_Match process(MatchInput matchInput) throws Exception {
+        League_Match leagueMatch = new League_Match();
+        leagueMatch.setId(Long.parseLong(matchInput.getId()));
+        leagueMatch.setCity(matchInput.getCity());
 
-        match.setDate(LocalDateTime.parse(matchInput.getDate()));
-        match.setPlayerOfMatch(matchInput.getPlayer_of_match());
-        match.setVenue(matchInput.getVenue());
+        leagueMatch.setDate(LocalDate.parse(matchInput.getDate()));
+        leagueMatch.setPlayerOfMatch(matchInput.getPlayer_of_match());
+        leagueMatch.setVenue(matchInput.getVenue());
 
         //Set Team1 and Team2 depnding on the innings order
         String firstInningsTeam, secondInningsTeam;
@@ -36,17 +33,17 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput,Match>{
                     ? matchInput.getTeam2() : matchInput.getTeam1();
         }
 
-        match.setTeam1(firstInningsTeam);
-        match.setTeam2(secondInningsTeam);
+        leagueMatch.setTeam1(firstInningsTeam);
+        leagueMatch.setTeam2(secondInningsTeam);
 
-        match.setTossWinner(matchInput.getToss_winner());
-        match.setTossDecision(matchInput.getToss_decision());
-        match.setResult(matchInput.getResult());
-        match.setResultMargin(matchInput.getResult_margin());
-        match.setUmpire1(matchInput.getUmpire1());
-        match.setUmpire2(matchInput.getUmpire2());
+        leagueMatch.setTossWinner(matchInput.getToss_winner());
+        leagueMatch.setTossDecision(matchInput.getToss_decision());
+        leagueMatch.setResult(matchInput.getResult());
+        leagueMatch.setResultMargin(matchInput.getResult_margin());
+        leagueMatch.setUmpire1(matchInput.getUmpire1());
+        leagueMatch.setUmpire2(matchInput.getUmpire2());
 
-        return null;
+        return leagueMatch;
     }
 
     

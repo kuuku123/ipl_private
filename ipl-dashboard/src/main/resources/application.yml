@@ -4,3 +4,14 @@ spring:
     url: jdbc:mysql://192.168.14.74:3306/ipl_dashboard?serverTimezone=Asia/Seoul
     username: tony-dev-pc
     password: 1234
+  batch:
+    initialize-schema: always
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database: mysql
+    databse-platform: org.hibernate.dialect.MySQL5InnoDBDialect
