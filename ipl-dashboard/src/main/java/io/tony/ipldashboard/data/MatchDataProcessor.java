@@ -38,6 +38,7 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, League_Matc
 
         leagueMatch.setTossWinner(matchInput.getToss_winner());
         leagueMatch.setTossDecision(matchInput.getToss_decision());
+        leagueMatch.setMatchWinner(matchInput.getWinner());
         leagueMatch.setResult(matchInput.getResult());
         leagueMatch.setResultMargin(matchInput.getResult_margin());
         leagueMatch.setUmpire1(matchInput.getUmpire1());
