@@ -1,13 +1,15 @@
 package io.tony.ipldashboard.controller;
 
+import io.tony.ipldashboard.model.League_Match;
 import io.tony.ipldashboard.model.Team;
 import io.tony.ipldashboard.repository.LeagueMatchRepository;
 import io.tony.ipldashboard.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,10 +19,19 @@ public class TeamController {
     private final LeagueMatchRepository leagueMatchRepository;
 
     @GetMapping("/team/{teamName}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Team getTeam(@PathVariable String teamName) {
         Team team = teamRepository.findByTeamName(teamName)
                 .orElseGet(() -> new Team("no such team", 0));
         team.setLeague_matches(leagueMatchRepository.findLatestMatchesByTeam(teamName,4));
         return team;
+    }
+
+    @GetMapping("/team/{teamName}/matches")
+    public List<League_Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year+1,1,1);
+        List<League_Match> matchesByTeamBetweenDates = leagueMatchRepository.getMatchesByTeamBetweenDates(teamName, startDate, endDate);
+        return matchesByTeamBetweenDates;
     }
 }
