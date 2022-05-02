@@ -12,7 +12,7 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, League_Matc
     @Override
     public League_Match process(MatchInput matchInput) throws Exception {
         League_Match leagueMatch = new League_Match();
-        leagueMatch.setId(Long.parseLong(matchInput.getId()));
+        leagueMatch.setId(Long.parseLong(matchInput.getId().replaceAll("[^0-9]+","")));
         leagueMatch.setCity(matchInput.getCity());
 
         leagueMatch.setDate(LocalDate.parse(matchInput.getDate()));

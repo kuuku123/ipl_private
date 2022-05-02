@@ -28,6 +28,7 @@ public class TeamController {
     }
 
     @GetMapping("/team/{teamName}/matches")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<League_Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year+1,1,1);
