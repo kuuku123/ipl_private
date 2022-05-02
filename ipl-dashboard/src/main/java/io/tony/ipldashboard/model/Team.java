@@ -16,7 +16,7 @@ import java.util.List;
 public class Team {
 
     @Id @GeneratedValue
-    private long ld;
+    private long id;
 
     private String teamName;
     private long totalMatches;

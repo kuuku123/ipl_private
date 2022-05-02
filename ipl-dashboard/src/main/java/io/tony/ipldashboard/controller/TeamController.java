@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class TeamController {
 
     private final TeamRepository teamRepository;
@@ -28,7 +29,6 @@ public class TeamController {
     }
 
     @GetMapping("/team/{teamName}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public Team getTeam(@PathVariable String teamName) {
         Team team = teamRepository.findByTeamName(teamName)
                 .orElseGet(() -> new Team("no such team", 0));
@@ -37,7 +37,6 @@ public class TeamController {
     }
 
     @GetMapping("/team/{teamName}/matches")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<League_Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year+1,1,1);
