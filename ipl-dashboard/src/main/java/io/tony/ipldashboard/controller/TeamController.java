@@ -6,6 +6,7 @@ import io.tony.ipldashboard.repository.LeagueMatchRepository;
 import io.tony.ipldashboard.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,14 @@ public class TeamController {
 
     private final TeamRepository teamRepository;
     private final LeagueMatchRepository leagueMatchRepository;
+
+    @GetMapping("/team")
+    public List<Team> getAllTeam() {
+        Iterable<Team> all = teamRepository.findAll();
+        List<Team> teams = Streamable.of(all)
+                .stream().toList();
+        return teams;
+    }
 
     @GetMapping("/team/{teamName}")
     @CrossOrigin(origins = "http://localhost:3000")
