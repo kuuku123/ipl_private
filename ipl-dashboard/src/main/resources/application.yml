@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/ipl_dashboard?serverTimezone=Asia/Seoul
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/ipl_dashboard?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://${MYSQL_HOST:192.168.14.74}:${MYSQL_PORT:3306}/ipl_dashboard?serverTimezone=Asia/Seoul
     username: tony-dev-pc
 #    username: root
     password: 1234
